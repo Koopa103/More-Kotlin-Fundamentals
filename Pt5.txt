@@ -1,0 +1,37 @@
+enum class Daypart {
+    MORNING,
+    AFTERNOON,
+    EVENING,
+}
+
+
+data class Event(
+    val title: String,
+    val descript: String? = null,
+    val timeofday: Daypart,
+    val dur: Int,
+)
+
+fun main() {
+   val eventlist = mutableListOf<Event>(e1, e2, e3, e4, e5, e6)
+   val shortevent = eventlist.filter { it.dur < 60 }
+	println("You have ${shortevent.size} short events.")
+    
+    
+val groups = eventlist.groupBy { it.timeofday }
+groups.forEach { (timeofday, eventlist) ->
+    println("$timeofday: ${eventlist.size} events")
+}
+
+println("Duration of first event of the day: ${eventlist[0].timeofday}")
+println("Last event of the day: ${eventlist.last().title}")
+
+val Event.durationOfEvent: String
+    get() = if (this.durationInMinutes < 60) {
+        "short"
+    } else {
+        "long"
+    }
+
+
+}
